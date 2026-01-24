@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MyAuktion++
 // @namespace    http://tampermonkey.net/
-// @version      2026-01-20
+// @version      2026-01-24
 // @description  Improves the MyAuktion UI a bit, e.g. by automatically filtering less interesting items
 // @author       Thomas H.
 // @match        https://myauktion.com/*
@@ -64,7 +64,7 @@
             "Gewürz", "Salz", "Kräuter", "Pfeffer", "Rosmarin", "Paprika", "Cumin", "Chillies",
             "Dekoration", "Dart", "Lesebrille", "Perlen", "Meditation", "Geldtasche", "Geldbeutel", "Kontaktlinse", "Pantys",
             "Perfume", "Parfüm", "Eyeliner", "Wimpern", "Lockenwickler", "Ohrringe", "Ohr ringe", "Collagen Stimulation",
-            "Shower Head", "Duschkopf", "Geschenk", "Kerze", "Spiel", "Game", "Kalender", "Advent", "Schmuck", "Haarreif",
+            "Shower Head", "Duschkopf", "Geschenk", "Kerze", "Kalender", "Advent", "Schmuck", "Haarreif",
             "Machine Cleaning Tablets", "Tischläufer", "Tischdecke", "Garderobenhaken", "Haarklammer", "Necklace", "Drumsticks", "Unterwäsche",
             "Kissenfüllung", "Schuhabstreifer", "Shoulder Rest", "Latzschürze", "Vorbinder", "Nagelfeile", "Nagelhaut", "Dünger",
             "Picture frame", "Bilderrahmen", "Bilderahmen", "Bilder mit Rahmen", "Helm", "Curtain Rod", "Butt-Löffel", "Butt Haken", "Football", "Fußball",
@@ -83,6 +83,7 @@
 
             if (filteredTerms.some(term => text.includes(term))) {
                 row.style.display = "none";
+                console.log("Found [" + term + "] in \"" + text + "\"");
             }
         });
     });
