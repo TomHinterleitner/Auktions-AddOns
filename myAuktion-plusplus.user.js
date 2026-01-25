@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MyAuktion++
 // @namespace    http://tampermonkey.net/
-// @version      2026-01-24
+// @version      2026-01-26
 // @description  Improves the MyAuktion UI a bit, e.g. by automatically filtering less interesting items
 // @author       Thomas H.
 // @match        https://myauktion.com/*
@@ -37,19 +37,20 @@
     let filteredTerms =
         [
             "Toothbrush", "Bürstenkopf", "Bürstenköpf", "Oral B", "Zahnbürste", "sonicare", "soni care",
-            "Cellphone Case", "Handy Hülle", "Handyhülle", "Silicone Case", "Silikon Case", "Clear Case", "Fashion Case",
-            "Screen Protector", "Schutzglas", "Panzerglas", "Panserglas", "Frame Cover", "Schutzhülle", "Schutzfolie", "Tempered Glass", "Camera Protector", "Grip Case", "Book type Hülle", "Case Iphone", "Hülle für Iphone", "Hülle Iphone", "Leather Case", "Ipad Hülle",
+            "Cellphone Case", "Handy Hülle", "Handyhülle", "Silicone Case", "Silikon Case", "Clear Case", "Fashion Case", "Protective Case", "Cover Soft", "Cover MagSafe", "Book Elegance", "Wallet Case",
+            "Screen Protector", "Schutzglas", "Panzerglas", "Panserglas", "Frame Cover", "Schutzhülle", "Schutzfolie", "Tempered Glass", "Camera Protector", "Grip Case", "Book type Hülle", "Case Iphone", "Case für Iphone", "Case for Iphone", "Hülle für Iphone", "Hülle Iphone", "Leather Case", "Ipad Hülle", "Watch Case", "Camera Lens Protector", "S Pen Case",
             "Trimmer", "Shaver", "Shaving", "Rasierapparat", "Haarschneider",
-            "Lasertoner", "Tintenpatrone", "Druckerpatrone", "Ink Cartridge", "Ink Jet Cartridge", "Tonerkartusche", "Toner Cartridge", "Print Cartridge", "Epson Multipack", "Druckpatrone", "Canon Pixma Multipack", "Ricoh Cartridge", "Canon Cartridge", "305XL Black",
-            "MagPro", "Apple TV", "iMac", "AirPods",
-            "Vaptio", "Iqos", "Livington", "The Monsters Pop",
-            "Set-Top-Box", "Satellitenkabel",
+            "Lasertoner", "Tintenpatrone", "Druckerpatrone", "Ink Cartridge", "Ink Jet Cartridge", "Tonerkartusche", "Toner Cartridge", "Print Cartridge", "Epson Multipack", "Druckpatrone", "Druckerpatrone", "Canon Pixma", "Ricoh Cartridge", "Canon Cartridge", "305XL Black", "HP Laserjet",
+            "MagPro", "Apple TV", "iMac", "AirPods", "Apple Watch", "Pencil für I",
+            "Vaptio", "Iqos", "Livington", "The Monsters Pop", "Mediashop",
+            "Set-Top-Box", "Satellitenkabel", "Telefonkabel", "Sky Rec",
             "Tastaturkappen", "Baby Night Light", "Schnuller", "Baby Care", "Pampers", "Windeln", "Baby Safety", "Baby Fitness",
-            "IPL Hair Remov", "Flexibrush", "Eyelash Curler", "Eyeshadow", "Eye Shadow", "Haarstyler", "Hair Dye", "Hairbrush", "Hair Styler",
+            "IPL Hair Remov", "Flexibrush", "Eyelash Curler", "Eyeshadow", "Eye Shadow", "Haarstyler", "Hair Dye", "Hairbrush", "Hair Styler", "Lockenstab", "Haartrockner",
             "Haarfärb", "Nagellack",
-            "Wasserfilter", "Ontap Filter", "Replacement Filter", "Air Filter", "Fuel Filter", "Ersatzfilter", "Luftreiniger", "Filtration Media", "Luftfilter", "Öl-Filter", "Öl Filter", "Ölfilter", "schlauch Filter",
-            "Bügeleisen", "Bügelstation", "Kontaktgrill", "Portable Electronic Scale", "Luggage Scale", "Brotbackautomat", "Screen Replacement", "Display Kit",
+            "Wasserfilter", "Ontap Filter", "Replacement Filter", "Air Filter", "Fuel Filter", "Ersatzfilter", "Luftreiniger", "Filtration Media", "Luftfilter", "Öl-Filter", "Öl Filter", "Ölfilter", "schlauch Filter", "Duschfilter",
+            "Bügeleisen", "Bügelstation", "Kontaktgrill", "Portable Electronic Scale", "Luggage Scale", "Brotbackautomat", "Screen Replacement", "Display Kit", "Fritteuse", "Air fry", "plastic apparatus",
             "Blutzucker", "AirFit", "Hearing Aid", "Beatmungsgerät", "CPAP", "CPAT", "Accu Check", "Accu-Check", "Accu-Chek", "Massage Belt", "Massagebürste",
+            "Telemat Sensormatte",
             "Dexcom", "orthese", "fersensohlen", "knieschiene", "One Touch Delicia", "OneTouch Delic", "Hornhaute",
             "Staubsauger", "Vacuum Cleaner", "Pure Era Microfiber Bag", "Dyson", "Roomba", "Hypoallergen", "Vacuumierbeutel", "Pet Grooming",
             "Emporia", "Fujifilm", "Siemens EQ Series", "Handheld Magnifier", "Turmventilator", "Turmventillator", "Verdampfer",
@@ -81,9 +82,14 @@
              .forEach(row => {
             const text = row.querySelector("td h3")?.textContent.toLowerCase() ?? "";
 
-            if (filteredTerms.some(term => text.includes(term))) {
-                row.style.display = "none";
-                console.log("Found [" + term + "] in \"" + text + "\"");
+            for (let i = 0; i < filteredTerms.length; i++) {
+                const term = filteredTerms[i];
+
+                if (text.includes(term)) {
+                    row.style.display = "none";
+                    console.log(`Found [${term}] in "${text}"`);
+                    break;
+                }
             }
         });
     });
