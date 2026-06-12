@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MyAuktion++
 // @namespace    http://tampermonkey.net/
-// @version      2026-01-26
+// @version      2026-06-12
 // @description  Improves the MyAuktion UI a bit, e.g. by automatically filtering less interesting items
 // @author       Thomas H.
 // @match        https://myauktion.com/*
@@ -74,7 +74,21 @@
             "Strumpfhose", "Sammelalbum", "Köder", "Erstkommunion", "Erinnerungsbuch", "CO2 Cylinder", "Topfunter",
             "Fitnessgewicht", "Makeup", "Künstliche Pflanze", "Künstliche Blume", "Windmühle", "Poker Cards", "Poker Karten", "Straßenmal",
             "Contouring Face", "Obstschale", "Fensterwischer", "Rasensamen",
-            "McDonalds", "MC Donalds"
+            "McDonalds", "MC Donalds",
+            "Diverse Schrauben", "Scharnier", "Schanier", "Einstemmtürschloss", "Spül Kasten", "Spülkasten", "Farbroller", "Kärcher Bodendüse", "Druckregler",
+            "Kugelhahn", "Leichtzuschlagstoff", "Forstmarkier", "Kerbl Forst", "Forwtmarkier", "Ventilheizkörper", "Urinal", "Bodenwachs", "Spachtelmasse", "Acryldichtstoff",
+            "Stein Versiegelung", "Platten Versiegelung", "Stelzlager", "Diverse Metall Halterung", "Lochsägenbohrer", "Fächerschleifscheibe",
+            "Sägekette", "Einfachhaken", "TechniSat Montageplatte", "3D Printing Resin", "Unterboden", "Rohrverbinder", "Stahlzargen", "Abgas", "Stichsägenbl",
+            "Nagelrolle", "Farbwalze", "Rubber Roller", "Gummi Roller", "Mähmesser", "Holzseife", "Carver Deterol", "Wood Stain", "Wippschalter", "Stahlkette",
+            "Sechskantschraub", "Gas Heater", "Lochband", "Klemmring", "Mörtel", "Sockelfuss", "Diverse Türschlösser", "Zugfeder", "Handbrause", "Bau Eimer",
+            "Bau Kasten", "Bau Kübel", "Nietzange", "Wickelfalzrohr", "Gewindeverschraub", "Spannzange", "Ladewagenmesser", "Tragrolle", "Infusionsstativ",
+            "Spezialschnalle", "Zylinderkopf", "Objektträger", "Tapered Roller Bearing", "Lagerbolzen", "Hydraulileitung", "Hydraulikleitung", "Hydraulisches Verbindungsteil",
+            "Schwaderzinken", "Ersatzteile für BMW", "Swagelok", "Atemgerät", "Rückschlag Ventil", "Rückschlagventil", "Sprossenschuh", "Reibahle", "Erodierfilter",
+            "Rillenkugellager", "Flange Bolts", "Kraftstofffilter", "Softstarter", "Sofstarter", "Kupplungsdose", "Ölfilter", "A1 Hybrid Box", "Stihl Ladegerät",
+            "Tragbarer CD Player", "Toner Collection", "Resin Cartridge", "Cooler Evaporative", "Hot Air Styler", "Controller Stand", "Headphone Stand", "Breast Pump",
+            "Espresso Maker", "Toaster", "Espresso Machine", "Oilfree Radiator", "Steam Generator Iron", "Magenta home Box", "Magenta Speedport", "Reiskocher", "Necklight",
+            "Wasserkocher", "Vibroshaper", "Case for iPad", "Fluorescent Lamp", "TV Wandhalterung", "Magenta Home Box", "Glätteisen", "Glühlampe", "Phone Video Amplifier",
+            "Vorwerk Kobold", "Wassersprudler", "Toner Kartusche", "Drum Unit", "Hörgeräte", "MF Phonak", "Raclette", "Miele Unterkorb", "LED-Unterflur"
         ].map(t => t.toLowerCase());
 
     catalogues.forEach(table => {
