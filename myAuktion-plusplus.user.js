@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MyAuktion++
 // @namespace    http://tampermonkey.net/
-// @version      2026-06-12
+// @version      2026-06-17
 // @description  Improves the MyAuktion UI a bit, e.g. by automatically filtering less interesting items
 // @author       Thomas H.
 // @match        https://myauktion.com/*
@@ -17,7 +17,41 @@
 
     // Re-Color NavBar as reminder this script is active
     let topNavBar = document.getElementById("top");
-    if(topNavBar) topNavBar.style = "background-color: darkgreen;";
+    
+    if(topNavBar) {
+        topNavBar.style = "background-color: darkgreen;";
+
+        let configBtn = document.createElement("button");
+        configBtn.textContent = "⚙️ Config Bidders";
+        configBtn.style.cssText = "margin-left: 15px; padding: 2px 8px; cursor: pointer; color: black; background: white; border-radius: 4px; border: 1px solid #ccc;";
+        configBtn.onclick = function(e) {
+            e.preventDefault();
+            let currentList = JSON.parse(localStorage.getItem("myAuktion_hoechstbieter_list") || "[]");
+            let input = prompt("Enter a comma-separated list of strings to check against 'hoechstbieter':", currentList.join(", "));
+            if (input !== null) {
+                let newList = input.split(",").map(s => s.trim()).filter(s => s.length > 0);
+                localStorage.setItem("myAuktion_hoechstbieter_list", JSON.stringify(newList));
+                alert("List saved! Reloading page...");
+                location.reload();
+            }
+        };
+        topNavBar.appendChild(configBtn);
+    }
+
+    let hoechstbieterElement = document.getElementById("hoechstbieter");
+    if (hoechstbieterElement && hoechstbieterElement.children.length > 0) {
+        let hoechstbieterText = hoechstbieterElement.children[0].innerHTML;
+        let checkList = JSON.parse(localStorage.getItem("myAuktion_hoechstbieter_list") || "[]");
+
+        let matched = checkList.some(item => hoechstbieterText.includes(item));
+        if (matched) {
+            hoechstbieterElement.style.backgroundColor = "yellow";
+            hoechstbieterElement.style.color = "red";
+            hoechstbieterElement.style.fontWeight = "bold";
+            hoechstbieterElement.style.padding = "2px";
+            console.log("MyAuktion++: Hoechstbieter check matched -> " + hoechstbieterText);
+        }
+    }
 
     let allTables = Array.from(document.getElementsByClassName("katalog"));
     if(!allTables.length) return;
